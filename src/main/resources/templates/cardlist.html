@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,6 +74,7 @@
 
                     <!-- Painikkeet -->
                     <div class="col-12 col-lg-2 d-flex gap-2 justify-content-lg-end align-items-center">
+                        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/add}" class="btn btn-sm btn-success">+ Add</a>
                         <button type="submit" class="btn btn-sm btn-primary px-3">Filter</button>
                         <a th:href="@{/cards}" class="btn btn-sm btn-outline-secondary">Reset</a>
                     </div>
@@ -116,6 +119,7 @@
                     <th scope="col">HP</th>
                     <th scope="col">Rarity</th>
                     <th scope="col">Traits</th>
+                    <th sec:authorize="hasAuthority('ADMIN')" scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -160,7 +164,12 @@
                               th:text="${trait.name}">
                         </span>
                     </td>
-                </tr>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/edit/{id}(id=${card.id})}" class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a th:href="@{/delete/{id}(id=${card.id})}" 
+                       class="btn btn-sm btn-outline-danger" 
+                       onclick="return confirm('Haluatko varmasti poistaa tämän kortin?');">Delete</a>
+                </td>
             </tbody>
         </table>
     </div>

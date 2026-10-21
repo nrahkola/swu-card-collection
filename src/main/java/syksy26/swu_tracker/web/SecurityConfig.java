@@ -21,7 +21,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/css/**", "/images/**", "/js/**").permitAll()
+                .requestMatchers("/api/**", "/css/**", "/images/**", "/js/**").permitAll()
+                // Vain ADMIN pääsee lisäämään, tallentamaan, muokkaamaan ja poistamaan
+                .requestMatchers("/add", "/save", "/edit/**", "/delete/**").hasAuthority("ADMIN")
+                // Kaikki muut sivut (kuten /cards ja filtteröinti) vaativat kirjautumisen (USER tai ADMIN)
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
