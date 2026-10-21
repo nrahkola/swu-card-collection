@@ -1,0 +1,73 @@
+body {
+    background-color: #12151a;
+    color: #d1d5db;
+}
+
+.card-preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+.card-thumb {
+    width: 44px;
+    height: auto;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out;
+}
+
+.card-thumb:hover {
+    transform: scale(1.08);
+}
+
+.card-large-preview {
+    display: none;
+    position: absolute;
+    left: 60px;
+    top: -10px;
+    bottom: auto;
+    width: 280px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95);
+    border: 2px solid #ffc107;
+    z-index: 1050;
+    pointer-events: none;
+}
+
+tbody tr:nth-child(1) .card-large-preview,
+tbody tr:nth-child(2) .card-large-preview {
+    top: -10px;
+    bottom: auto;
+    transform: none;
+}
+
+tbody tr:nth-last-child(1) .card-large-preview,
+tbody tr:nth-last-child(2) .card-large-preview,
+tbody tr:nth-last-child(3) .card-large-preview,
+tbody tr:nth-last-child(4) .card-large-preview,
+tbody tr:nth-last-child(5) .card-large-preview {
+    top: auto;
+    bottom: 0;
+    transform: none;
+}
+
+.card-preview-container:hover .card-large-preview {
+    display: block;
+}
+
+.badge-vigilance { background-color: #0d6efd; color: #fff; }
+.badge-command   { background-color: #198754; color: #fff; }
+.badge-aggression { background-color: #dc3545; color: #fff; }
+.badge-cunning   { background-color: #ffc107; color: #000; }
+.badge-heroism   { background-color: #f8f9fa; color: #000; }
+.badge-villainy  { background-color: #212529; color: #fff; border: 1px solid #495057; }
+.badge-neutral   { background-color: #6c757d; color: #fff; }
+
+.table-responsive {
+    overflow: visible !important;
+}
+
+table {
+    margin-bottom: 350px;
+}
