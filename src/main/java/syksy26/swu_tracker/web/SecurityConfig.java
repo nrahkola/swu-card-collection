@@ -22,15 +22,18 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**", "/css/**", "/images/**", "/js/**").permitAll()
+                        .requestMatchers("/api/**", "/css/**", "/images/**", "/js/**", "/error").permitAll()
                         .requestMatchers("/add", "/save", "/edit/**", "/delete/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .defaultSuccessUrl("/cards", true)
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll());
+                    .logoutSuccessUrl("/login")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
+                );
 
         return http.build();
     }

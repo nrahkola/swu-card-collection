@@ -6,8 +6,8 @@ POST http://localhost:8080/api/cards
 Content-Type: application/json
 
 {
-  "name": "Darth Vader, Commanding the 501st",
-  "cardNumber": "010",
+  "name": "Oma Testi Vader",
+  "cardNumber": "999",
   "type": "Leader",
   "cost": 7,
   "power": 5,
@@ -15,27 +15,28 @@ Content-Type: application/json
   "rarity": "Legendary",
   "imageUrl": "https://api.swu-db.com/cards/sor/010.png",
   "expansionSet": {
-    "id": 1
+    "id": 11
   }
 }
 
+
 ### Muokkaa korttia (PUT)
-PUT http://localhost:8080/api/cards/1
+PUT http://localhost:8080/api/cards/9972
 Content-Type: application/json
 
 {
-  "name": "Darth Vader, Commanding the 501st",
-  "cardNumber": "010",
+  "name": "Oma Testi Vader",
+  "cardNumber": "999",
   "type": "Leader",
   "cost": 7,
-  "power": 6, 
-  "hp": 9,
+  "power": 99, 
+  "hp": 99,
   "rarity": "Legendary",
   "imageUrl": "https://api.swu-db.com/cards/sor/010.png",
   "expansionSet": {
-    "id": 1
+    "id": 11
   }
 }
 
 ### Poista kortti (DELETE)
-DELETE http://localhost:8080/api/cards/1
+DELETE http://localhost:8080/api/cards/9972
