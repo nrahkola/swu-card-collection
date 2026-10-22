@@ -8,13 +8,14 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.validation.Valid;
 import syksy26.swu_tracker.domain.AspectRepository;
 import syksy26.swu_tracker.domain.Card;
 import syksy26.swu_tracker.domain.CardRepository;
@@ -43,19 +44,13 @@ public class CardController {
     private final TraitRepository traitRepository;
 
     public CardController(CardRepository cardRepository,
-                          AspectRepository aspectRepository,
-                          ExpansionSetRepository expansionSetRepository,
-                          TraitRepository traitRepository) {
+            AspectRepository aspectRepository,
+            ExpansionSetRepository expansionSetRepository,
+            TraitRepository traitRepository) {
         this.cardRepository = cardRepository;
         this.aspectRepository = aspectRepository;
         this.expansionSetRepository = expansionSetRepository;
         this.traitRepository = traitRepository;
-    }
-
-    @GetMapping("/api/cards")
-    @ResponseBody
-    public List<Card> getCardsRest() {
-        return (List<Card>) cardRepository.findAll();
     }
 
     @GetMapping({ "/", "/cards", "/cardlist" })
@@ -128,8 +123,17 @@ public class CardController {
     }
 
     @PostMapping("/save")
-    public String saveNewCard(@ModelAttribute("card") Card card,
-                              @RequestParam(name = "traitNames", required = false) String traitNames) {
+    public String saveNewCard(@Valid @ModelAttribute("card") Card card,
+            BindingResult bindingResult,
+            @RequestParam(name = "traitNames", required = false) String traitNames,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("allSets", expansionSetRepository.findAll());
+            model.addAttribute("allAspects", aspectRepository.findAll());
+            return "addcard";
+        }
+
         card.setTraits(parseTraits(traitNames));
         cardRepository.save(card);
         return "redirect:/cards";
@@ -146,14 +150,23 @@ public class CardController {
     }
 
     @PostMapping("/edit")
-    public String saveEditedCard(@ModelAttribute("card") Card card,
-                                 @RequestParam(name = "traitNames", required = false) String traitNames) {
+    public String saveEditedCard(@Valid @ModelAttribute("card") Card card,
+            BindingResult bindingResult,
+            @RequestParam(name = "traitNames", required = false) String traitNames,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("allSets", expansionSetRepository.findAll());
+            model.addAttribute("allAspects", aspectRepository.findAll());
+            return "editcard";
+        }
+
         card.setTraits(parseTraits(traitNames));
         cardRepository.save(card);
         return "redirect:/cards";
     }
 
-    // Apumetodi: pilkkoo pilkulla erotetut piirteet ja tallentaa puuttuvat kantaan
+    // Pilkkoo pilkulla erotetut traitit ja tallentaa puuttuvat kantaan
     private Set<Trait> parseTraits(String traitNames) {
         Set<Trait> traits = new HashSet<>();
         if (traitNames != null && !traitNames.trim().isEmpty()) {

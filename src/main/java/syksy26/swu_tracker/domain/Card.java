@@ -36,6 +36,8 @@ public class Card {
     private Integer hp;
     private String rarity;
     private String imageUrl;
+
+    @NotBlank(message = "Kortin numero on pakollinen")
     @Column(name = "card_number")
     private String cardNumber;
 

@@ -9,22 +9,25 @@
 <body class="bg-dark text-light">
 <div class="container py-5" style="max-width: 650px;">
     <div class="card bg-secondary text-light p-4 shadow">
-        <h2 class="text-success mb-4">Add New Card</h2>
+        <h2 class="text-light mb-4">Add New Card</h2>
 
         <form th:action="@{/save}" th:object="${card}" method="post">
             <div class="mb-3">
                 <label class="form-label fw-bold">Card Name</label>
-                <input type="text" class="form-control bg-dark text-light border-secondary" th:field="*{name}" required />
+                <input type="text" class="form-control bg-dark text-light border-secondary" th:field="*{name}" />
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="small mt-1 fw-bold" style="color: #ff6b6b;"></div>
             </div>
 
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold">Card Number (#)</label>
                     <input type="text" class="form-control bg-dark text-light border-secondary" th:field="*{cardNumber}" />
+                    <div th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}" class="small mt-1 fw-bold" style="color: #ff6b6b;"></div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold">Type</label>
                     <input type="text" class="form-control bg-dark text-light border-secondary" th:field="*{type}" placeholder="Unit, Event, Leader..." />
+                    <div th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="text-danger small mt-1"></div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label fw-bold">Rarity</label>
@@ -56,6 +59,7 @@
             <div class="mb-3">
                 <label class="form-label fw-bold">Expansion Set</label>
                 <select class="form-select bg-dark text-light border-secondary" th:field="*{expansionSet}">
+                    <div th:if="${#fields.hasErrors('expansionSet')}" th:errors="*{expansionSet}" class="text-danger small mt-1"></div>
                     <option th:each="set : ${allSets}" 
                             th:value="${set.id}" 
                             th:text="${set.name + ' (' + set.code + ')'}">
@@ -86,7 +90,7 @@
                     name="traitNames" 
                     class="form-control bg-dark text-light border-secondary" 
                     placeholder="Esim. Imperial, Trooper, Leader" />
-            <div class="form-text text-secondary small">Erottele useampi piirre pilkulla.</div>
+            <div class="form-text text-secondary small">Erottele useampi Trait pilkulla.</div>
         </div>
 
             <div class="mb-3">

@@ -23,10 +23,10 @@ public class ExpansionSet {
 
     @NotBlank(message = "Setin koodi on pakollinen")
     @Column(unique = true, nullable = false)
-    private String code; // esim. "SOR", "SHD", "TWI"
+    private String code;
 
     @NotBlank(message = "Setin nimi on pakollinen")
-    private String name; // esim. "Spark of Rebellion"
+    private String name;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "expansionSet")

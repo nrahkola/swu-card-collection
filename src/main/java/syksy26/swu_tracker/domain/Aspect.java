@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "aspect")
 public class Aspect {
@@ -21,6 +23,7 @@ public class Aspect {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "aspects")
     private Set<Card> cards = new HashSet<>();
 
