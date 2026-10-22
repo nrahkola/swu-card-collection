@@ -57,13 +57,41 @@ tbody tr:nth-last-child(5) .card-large-preview {
     display: block;
 }
 
-.badge-vigilance { background-color: #0d6efd; color: #fff; }
-.badge-command   { background-color: #198754; color: #fff; }
-.badge-aggression { background-color: #dc3545; color: #fff; }
-.badge-cunning   { background-color: #ffc107; color: #000; }
-.badge-heroism   { background-color: #f8f9fa; color: #000; }
-.badge-villainy  { background-color: #212529; color: #fff; border: 1px solid #495057; }
-.badge-neutral   { background-color: #6c757d; color: #fff; }
+.badge-vigilance {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.badge-command {
+    background-color: #198754;
+    color: #fff;
+}
+
+.badge-aggression {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge-cunning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-heroism {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+.badge-villainy {
+    background-color: #212529;
+    color: #fff;
+    border: 1px solid #495057;
+}
+
+.badge-neutral {
+    background-color: #6c757d;
+    color: #fff;
+}
 
 .table-responsive {
     overflow: visible !important;

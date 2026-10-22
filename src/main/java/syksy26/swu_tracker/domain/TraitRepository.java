@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TraitRepository extends CrudRepository<Trait, Long> {
     List<Trait> findAll();
+
     Trait findByName(String name);
+
     Optional<Trait> findByNameIgnoreCase(String name);
 }

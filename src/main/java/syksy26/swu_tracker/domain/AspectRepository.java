@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AspectRepository extends CrudRepository<Aspect, Long> {
     List<Aspect> findAll();
+
     Aspect findByName(String name);
 }

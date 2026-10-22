@@ -27,7 +27,8 @@ public class Aspect {
     @ManyToMany(mappedBy = "aspects")
     private Set<Card> cards = new HashSet<>();
 
-    public Aspect() {}
+    public Aspect() {
+    }
 
     public Aspect(String name) {
         this.name = name;

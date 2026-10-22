@@ -47,25 +47,18 @@ public class Card {
     private ExpansionSet expansionSet;
 
     @ManyToMany
-    @JoinTable(
-        name = "card_trait",
-        joinColumns = @JoinColumn(name = "card_id"),
-        inverseJoinColumns = @JoinColumn(name = "trait_id")
-    )
+    @JoinTable(name = "card_trait", joinColumns = @JoinColumn(name = "card_id"), inverseJoinColumns = @JoinColumn(name = "trait_id"))
     private Set<Trait> traits = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "card_aspect",
-        joinColumns = @JoinColumn(name = "card_id"),
-        inverseJoinColumns = @JoinColumn(name = "aspect_id")
-    )
+    @JoinTable(name = "card_aspect", joinColumns = @JoinColumn(name = "card_id"), inverseJoinColumns = @JoinColumn(name = "aspect_id"))
     private Set<Aspect> aspects = new HashSet<>();
 
     public Card() {
     }
 
-    public Card(String name, String cardNumber, String type, Integer cost, Integer power, Integer hp, String rarity, String imageUrl, ExpansionSet expansionSet) {
+    public Card(String name, String cardNumber, String type, Integer cost, Integer power, Integer hp, String rarity,
+            String imageUrl, ExpansionSet expansionSet) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.type = type;
@@ -166,10 +159,10 @@ public class Card {
     }
 
     public Set<Aspect> getAspects() {
-    return aspects;
-}
+        return aspects;
+    }
 
     public void setAspects(Set<Aspect> aspects) {
         this.aspects = aspects;
-}
+    }
 }
