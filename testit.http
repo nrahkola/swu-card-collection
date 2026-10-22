@@ -1,0 +1,41 @@
+### Hae kaikki kortit
+GET http://localhost:8080/api/cards
+
+### Lisää uusi kortti
+POST http://localhost:8080/api/cards
+Content-Type: application/json
+
+{
+  "name": "Darth Vader, Commanding the 501st",
+  "cardNumber": "010",
+  "type": "Leader",
+  "cost": 7,
+  "power": 5,
+  "hp": 8,
+  "rarity": "Legendary",
+  "imageUrl": "https://api.swu-db.com/cards/sor/010.png",
+  "expansionSet": {
+    "id": 1
+  }
+}
+
+### Muokkaa korttia (PUT)
+PUT http://localhost:8080/api/cards/1
+Content-Type: application/json
+
+{
+  "name": "Darth Vader, Commanding the 501st",
+  "cardNumber": "010",
+  "type": "Leader",
+  "cost": 7,
+  "power": 6, 
+  "hp": 9,
+  "rarity": "Legendary",
+  "imageUrl": "https://api.swu-db.com/cards/sor/010.png",
+  "expansionSet": {
+    "id": 1
+  }
+}
+
+### Poista kortti (DELETE)
+DELETE http://localhost:8080/api/cards/1

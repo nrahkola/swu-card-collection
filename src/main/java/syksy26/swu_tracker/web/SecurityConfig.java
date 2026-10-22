@@ -20,21 +20,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/**", "/css/**", "/images/**", "/js/**").permitAll()
-                // Vain ADMIN pääsee lisäämään, tallentamaan, muokkaamaan ja poistamaan
-                .requestMatchers("/add", "/save", "/edit/**", "/delete/**").hasAuthority("ADMIN")
-                // Kaikki muut sivut (kuten /cards ja filtteröinti) vaativat kirjautumisen (USER tai ADMIN)
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .defaultSuccessUrl("/cards", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
-            );
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/**", "/css/**", "/images/**", "/js/**").permitAll()
+                        .requestMatchers("/add", "/save", "/edit/**", "/delete/**").hasAuthority("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/cards", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll());
 
         return http.build();
     }
