@@ -1,5 +1,5 @@
 # Build-vaihe
-FROM eclipse-temurin:17-jdk-focal AS builder
+FROM eclipse-temurin:21-jdk-jammy AS builder
 
 WORKDIR /opt/app
 
@@ -21,7 +21,7 @@ RUN ./mvnw clean install -DskipTests
 RUN cp target/*.jar /opt/app/app.jar
 
 # Runtime-vaihe
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /opt/app
 
