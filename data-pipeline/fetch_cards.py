@@ -1,8 +1,15 @@
+import os
 import time
 import requests
 from sqlalchemy import create_engine, text
 
-DATABASE_URL = "postgresql+psycopg2://postgres:qwerty1234@localhost:5432/swutracker"
+# Luetaan tietokannan tiedot turvallisesti ympäristömuuttujista
+DB_USER = os.getenv("DB_USER", "swuadmin")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "salasana_tähän")
+DB_HOST = os.getenv("POSTGRESQL_SERVICE_HOST", "localhost")
+DB_NAME = os.getenv("DB_NAME", "swu-tracker")
+
+DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:5432/{DB_NAME}"
 
 engine = create_engine(DATABASE_URL)
 

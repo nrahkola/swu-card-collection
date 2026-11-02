@@ -20,8 +20,8 @@ Content-Type: application/json
 }
 
 
-### Muokkaa korttia (PUT)
-PUT http://localhost:8080/api/cards/9972
+### Muokkaa korttia
+PUT http://localhost:8080/api/cards/12463
 Content-Type: application/json
 
 {
@@ -38,5 +38,5 @@ Content-Type: application/json
   }
 }
 
-### Poista kortti (DELETE)
-DELETE http://localhost:8080/api/cards/9972
+### Poista kortti
+DELETE http://localhost:8080/api/cards/12463
